@@ -1,0 +1,19 @@
+#POST http://localhost:8080/users
+#Content-Type: application/json
+#
+#{
+#  "email" : "test4@babylog.com",
+#  "name" : "파라미터정상"
+#}
+#
+#
+GET http://localhost:8080/users
+Content-Type: application/json
+
+#
+#PUT http://localhost:8080/users/1
+#Content-Type: application/json
+#
+#{
+#  "name":"수정된 이름"
+#}

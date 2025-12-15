@@ -1,0 +1,61 @@
+package com.first.babylog.service;
+
+import com.first.babylog.domain.User;
+import com.first.babylog.dto.UserCreateRequest;
+import com.first.babylog.dto.UserResponse;
+import com.first.babylog.dto.UserUpdateRequest;
+import com.first.babylog.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserService {
+    private final UserRepository userRepository;
+
+    //생성자 주입
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
+
+    //유저 생성 로직
+    public Long createUser(UserCreateRequest request){
+        User user = new User(
+                    request.getName(),
+                    request.getEmail()
+        );
+        return userRepository.save(user).getId();
+    }
+
+    public List<UserResponse> findAll(){
+        return userRepository.findAll()
+                .stream()
+                .map(user -> new UserResponse(
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail()
+
+                ))
+                .toList();
+    }
+
+    public UserResponse findById(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다. id = "+id));
+
+        return new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail()
+        );
+    }
+
+    @Transactional
+    public void updateUser(Long id, UserUpdateRequest request){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다. id="+id));
+
+        user.changeName(request.getName());
+    }
+}

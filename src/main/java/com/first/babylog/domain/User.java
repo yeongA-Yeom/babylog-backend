@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // 자동 생성 값
 
     @Column(nullable = false)
     private String email;
@@ -36,5 +36,10 @@ public class User {
     public String getName(){
         return name;
     }
+
+    public void changeName(String name){
+        this.name=name;
+    }
 }
+
 
