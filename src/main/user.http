@@ -2,18 +2,18 @@
 #Content-Type: application/json
 #
 #{
-#  "email" : "test4@babylog.com",
-#  "name" : "파라미터정상"
+#  "email" : "been@babylog.com",
+#  "name" : "염삔"
 #}
-#
-#
+
+
 GET http://localhost:8080/users
 Content-Type: application/json
 
 #
-#PUT http://localhost:8080/users/1
+#PUT http://localhost:8080/users/3
 #Content-Type: application/json
 #
 #{
-#  "name":"수정된 이름"
+#  "name":"유니엄마"
 #}
