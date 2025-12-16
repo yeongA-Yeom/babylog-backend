@@ -11,6 +11,11 @@ public class PageController {
         return "index"; // templates/index.html
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // templates/index.html
+    }
+
     @GetMapping("/signup")
     public String signUp() {
         return "signUp"; // templates/singUp.html

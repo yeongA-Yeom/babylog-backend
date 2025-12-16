@@ -9,9 +9,10 @@ signUpBtn.addEventListener('click', () => {
     window.open(
         '/signup',          // 열 페이지 (Spring 매핑)
         'signup',
-        'width=420,height=300,resizable=no'
+        'width=600,height=750,resizable=no'
     );
 });
+
 
 // 입력창 포커스 시 아웃라인 색상 함수
 function outlineColor(enter, color){

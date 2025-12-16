@@ -5,9 +5,16 @@ signUpForm.addEventListener('submit', (e) => {
 
     const email = document.querySelector('.ID input').value;
     const password = document.querySelector('.password input').value;
+    const RePassword = document.querySelector('.RePassword input').value;
     const name = document.querySelector('.name input').value;
 
     console.log('전송 데이터', { email, password, name });
+
+    // 비밀번호 불일치 먼저 처리
+    if (password.trim() !== RePassword.trim()) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+    }
 
     fetch('/users', {
         method: 'POST',
