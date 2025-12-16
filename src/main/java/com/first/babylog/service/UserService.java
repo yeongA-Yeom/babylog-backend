@@ -22,39 +22,42 @@ public class UserService {
     //유저 생성 로직
     public Long createUser(UserCreateRequest request){
         User user = new User(
-                    request.getName(),
-                    request.getEmail()
+                    request.getEmail(),
+                    request.getPassword(),
+                    request.getName()
         );
-        return userRepository.save(user).getId();
+        return userRepository.save(user).getNumber();
     }
 
     public List<UserResponse> findAll(){
         return userRepository.findAll()
                 .stream()
                 .map(user -> new UserResponse(
-                        user.getId(),
-                        user.getName(),
-                        user.getEmail()
+                        user.getNumber(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.getName()
 
                 ))
                 .toList();
     }
 
-    public UserResponse findById(Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다. id = "+id));
+    public UserResponse findById(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다. Email = "+email));
 
         return new UserResponse(
-                user.getId(),
-                user.getName(),
-                user.getEmail()
+                user.getNumber(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getName()
         );
     }
 
     @Transactional
-    public void updateUser(Long id, UserUpdateRequest request){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다. id="+id));
+    public void updateUser(String email, UserUpdateRequest request){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다. email="+email));
 
         user.changeName(request.getName());
     }

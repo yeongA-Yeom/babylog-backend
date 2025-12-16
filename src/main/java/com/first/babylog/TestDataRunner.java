@@ -15,7 +15,8 @@ public class TestDataRunner {
     CommandLineRunner init(UserService userService) {
         return args -> {
             UserCreateRequest request = new UserCreateRequest();
-            request.setEmail("test3@babylog.com");
+            request.setEmail("test@babylog.com");
+            request.setPassword("1234");
             request.setName("테스트3");
 
             userService.createUser(request);

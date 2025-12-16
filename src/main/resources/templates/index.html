@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BABY LOG</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+
+<header>
+    <div class="logo">Baby Log</div>
+    <div class="box">
+        <ul class="menu Left">
+            <li><a href="#">Coffee machines</a></li>
+            <li><a href="#">Coffee capsules</a></li>
+            <li><a href="#">Milk frother</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Sustainability</a></li>
+        </ul>
+
+
+        <ul class="menu Right">
+            <li>
+                <select name="Language" id="lang">
+                    <option value="En">English</option>
+                    <option value="Ko">Korea</option>
+                    <option value="Jp">Japan</option>
+                </select>
+            </li>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Account</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <form class="log-in">
+        <h1>LOG IN</h1>
+
+        <div class="ID">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your Email." required>
+        </div>
+
+        <div class="password">
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password." required>
+            <iconify-icon icon="proicons:eye" class="eye"></iconify-icon>
+        </div>
+
+        <button type="submit"  class="Sign-in">Sign In</button>
+
+        <div class="help">
+            <a href="#" class="help1">Forgot your password?</a>
+            <a href="#" class="help2">Manage subscriptions</a>
+        </div>
+
+        <hr>
+
+        <div class="account">
+            <h3>DON’T HAVE AN ACCOUNT YET?</h3>
+            <button type="button" id="signUpBtn">Register NOW</button>
+        </div>
+    </form>
+</main>
+
+<script src="/js/login.js" defer></script>
+</body>
+</html>

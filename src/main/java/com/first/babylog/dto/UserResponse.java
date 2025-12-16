@@ -6,14 +6,16 @@ import lombok.ToString;
 @Getter
 @ToString
 public class UserResponse {
-    private Long id;
-    private String name;
+    private Long number;
     private String email;
+    private String password;
+    private String name;
     private int age;
 
-    public  UserResponse(Long id, String name,String email){
-        this.id = id;
-        this.name = name;
+    public  UserResponse(Long number,String email, String password, String name){
+        this.number = number;
         this.email = email;
+        this.password = password;
+        this.name = name;
     }
 }

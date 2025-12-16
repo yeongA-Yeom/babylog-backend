@@ -33,17 +33,17 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public UserResponse findOne(@PathVariable Long id){
-        return userService.findById(id);
+    @GetMapping("/{email}")
+    public UserResponse findOne(@PathVariable String email){
+        return userService.findById(email);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{email}")
     public void updateUser(
-            @PathVariable Long id,
+            @PathVariable String email,
             @RequestBody UserUpdateRequest request
             ){
-                userService.updateUser(id, request);
+                userService.updateUser(email, request);
             }
 
 }

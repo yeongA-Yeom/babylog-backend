@@ -12,14 +12,30 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                // CSRF 비활성화 (API 테스트용)
+                // CSRF 끄기 (개발 단계)
                 .csrf(csrf -> csrf.disable())
 
-                // 모든 요청 허용
+                // 요청 허용 범위
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers(
+                                "/",                 // 홈
+                                "/error",            // 에러 페이지 ⭐ 중요
+                                "/js/**",
+                                "/css/**",
+                                "/images/**",
+                                "/h2-console/**"
+                        ).permitAll()
+                        .anyRequest().permitAll()   // ⭐ 지금 단계에서는 전부 허용
+                )
+
+                // 로그인 화면 안 쓸 거라 비활성
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable())
+
+                // H2 콘솔 iframe 허용
+                .headers(headers ->
+                        headers.frameOptions(frame -> frame.sameOrigin())
                 );
 
-        return http.build();
+        return http.build();}
     }
-}

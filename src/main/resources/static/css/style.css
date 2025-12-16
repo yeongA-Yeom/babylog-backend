@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Agdasima';
+    list-style: none;
+    color: #1D1D1B;
+}
+
+body {
+    background-color: #F6F5EE;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    width: 100%;
+    height: 64px;
+}
+
+header .box {
+    width: 96vw;
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    border-bottom: 1px solid #CAC7C7;
+}
+
+header .logo {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 메뉴 */
+.menu {
+    display: flex;
+    gap: 32px;
+    position: absolute;
+}
+
+.menu.Left {
+    left: 16px;
+}
+
+.menu.Right {
+    right: 16px;
+}
+
+.menu a {
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.menu select {
+    background-color: #F6F5EE;
+    border: none;
+    font-size: 16px;
+}
+
+/* ================= MAIN ================= */
+
+main {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px; /* header와 겹침 방지 */
+}
+
+/* 로그인 영역 */
+.log-in {
+    width: 640px;
+}
+
+.log-in h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+/* 입력 공통 */
+.log-in label {
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.log-in input {
+    width: 100%;
+    height: 48px;
+    margin-top: 8px;
+    padding: 0 16px;
+
+    background-color: #F6F5EE;
+    border: 1px solid #CAC7C7;
+    border-radius: 4px;
+}
+
+.log-in input:focus {
+    outline: 2px solid #CAC7C7;
+}
+
+/* 비밀번호 */
+.password {
+    position: relative;
+    margin-top: 18px;
+}
+
+.password .eye {
+    position: absolute;
+    right: 16px;
+    bottom: 14px;
+    font-size: 20px;
+    color: #75756F;
+    cursor: pointer;
+}
+
+/* 로그인 버튼 */
+.Sign-in {
+    margin-top: 40px;
+    background-color: #837d7d;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid #CAC7C7;
+    border-radius: 4px;
+}
+
+.Sign-in:hover {
+    background-color: #383833;
+}
+
+/* 도움말 */
+.help {
+    margin-top: 20px;
+}
+
+.help a {
+    display: block;
+    text-align: center;
+    color: #756f6f;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-bottom: 16px;
+}
+
+/* 구분선 */
+.log-in hr {
+    border: 1px solid #CAC7C7;
+    margin: 48px 0 40px;
+}
+
+/* 회원가입 */
+.account h3 {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.account button {
+    width: 100%;
+    height: 48px;
+    margin-top: 34px;
+
+    font-size: 20px;
+    color: #75756F;
+    background-color: #d3d2cc;
+    border: 1px solid #CAC7C7;
+    cursor: pointer;
+}
+
+.account button:hover {
+    background-color: #eee;
+}
