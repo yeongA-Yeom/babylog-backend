@@ -26,9 +26,11 @@ public class UserAgreement {
     private String agreementType;
 
     /** 동의 여부 */
+    @Column(name = "is_agreed", nullable = false)
     private boolean isAgreed;
 
     /** 동의 시각 */
+    @Column(name = "agreed_at", nullable = false)
     private LocalDateTime agreedAt;
 
     protected UserAgreement() {}

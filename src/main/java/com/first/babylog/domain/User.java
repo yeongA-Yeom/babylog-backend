@@ -2,6 +2,8 @@ package com.first.babylog.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -62,14 +64,19 @@ public class User {
     /**
      * 계정 생성 시각
      */
-    @Column(nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
 
     /**
      * 계정 수정 시각
      */
-    @Column(nullable = false)
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+
 
     /**
      * 탈퇴 시각 (소프트 삭제)
@@ -91,7 +98,5 @@ public class User {
         this.password = password;
         this.role = Role.USER;                 // 기본 권한
         this.status = UserStatus.ACTIVE;       // 기본 상태
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
     }
 }

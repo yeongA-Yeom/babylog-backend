@@ -2,6 +2,7 @@ package com.first.babylog.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,8 @@ public class UserEmail {
     private boolean isVerified = false;
 
     /** 등록 시각 */
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     /** 인증 완료 시각 */
