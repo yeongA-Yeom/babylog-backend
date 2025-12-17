@@ -2,36 +2,38 @@ package com.first.babylog.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http
-                // CSRF 끄기 (개발 단계)
+                // 개발 단계: CSRF 비활성화
                 .csrf(csrf -> csrf.disable())
 
-                // 요청 허용 범위
+                // 접근 허용 경로
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/",                 // 홈
-                                "/error",            // 에러 페이지 ⭐ 중요
-                                "/js/**",
-                                "/css/**",
-                                "/images/**",
-				"/login"
+                                "/",                // 메인
+                                "/login",           // 로그인
+                                "/signup",          // 회원가입 페이지
+                                "/users",           // 회원가입 API
+                                "/css/**",          // css
+                                "/js/**",           // js
+                                "/images/**"        // 이미지
                         ).permitAll()
-                        .anyRequest().permitAll()   // ⭐ 지금 단계에서는 전부 허용
+                        .anyRequest().authenticated()
                 )
 
-                // 로그인 화면 안 쓸 거라 비활성
-                .formLogin(form -> form.disable());
-//                .httpBasic(basic -> basic.disable())
+                // 기본 보안 방식 제거
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable());
 
-
-        return http.build();}
+        return http.build();
     }
+}
