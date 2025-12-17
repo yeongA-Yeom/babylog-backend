@@ -23,19 +23,15 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/css/**",
                                 "/images/**",
-                                "/h2-console/**"
+				"/login"
                         ).permitAll()
                         .anyRequest().permitAll()   // ⭐ 지금 단계에서는 전부 허용
                 )
 
                 // 로그인 화면 안 쓸 거라 비활성
                 .formLogin(form -> form.disable())
-                .httpBasic(basic -> basic.disable())
+//                .httpBasic(basic -> basic.disable())
 
-                // H2 콘솔 iframe 허용
-                .headers(headers ->
-                        headers.frameOptions(frame -> frame.sameOrigin())
-                );
 
         return http.build();}
     }
