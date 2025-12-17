@@ -29,7 +29,7 @@ public class SecurityConfig {
                 )
 
                 // 로그인 화면 안 쓸 거라 비활성
-                .formLogin(form -> form.disable())
+                .formLogin(form -> form.disable());
 //                .httpBasic(basic -> basic.disable())
 
 
