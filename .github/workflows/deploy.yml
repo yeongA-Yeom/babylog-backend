@@ -19,9 +19,21 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set +e
             cd ~/babylog-backend
+
+            echo "▶ Pull"
             git pull origin main
+
+            echo "▶ Build"
             ./gradlew build
-            pkill -f java || true
+
+            echo "▶ Stop old server"
+            pkill -f java || echo "no java process"
+
+            echo "▶ Start new server"
             nohup java -jar build/libs/*.jar > nohup.out 2>&1 &
-            exit 0
+
+            echo "✅ Deploy finished successfully"
+            true
+
