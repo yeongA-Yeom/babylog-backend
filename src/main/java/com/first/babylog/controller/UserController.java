@@ -1,10 +1,12 @@
 package com.first.babylog.controller;
 
-import com.first.babylog.domain.User;
 import com.first.babylog.dto.UserCreateRequest;
 import com.first.babylog.dto.UserResponse;
 import com.first.babylog.dto.UserUpdateRequest;
 import com.first.babylog.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +25,13 @@ public class UserController {
 
     //유저 생성 API
     @PostMapping
-    public Long createUser(@RequestBody UserCreateRequest request)
-    {
-        return userService.createUser(request);
+    public ResponseEntity<?> signUp(@RequestBody UserCreateRequest request){
+        try {
+            userService.signUp(request);
+            return ResponseEntity.ok().build();
+        }catch (IllegalStateException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -33,17 +39,17 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{email}")
-    public UserResponse findOne(@PathVariable String email){
-        return userService.findById(email);
+    @GetMapping("/{id}")
+    public UserResponse findOne(@PathVariable String id){
+        return userService.findByLoginId(id);
     }
 
-    @PutMapping("/{email}")
+    @PutMapping("/{id}")
     public void updateUser(
-            @PathVariable String email,
+            @PathVariable String id,
             @RequestBody UserUpdateRequest request
             ){
-                userService.updateUser(email, request);
+                userService.updateUser(id, request);
             }
 
 }

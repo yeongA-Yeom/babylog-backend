@@ -14,16 +14,16 @@ public class TestDataRunner {
     @Bean
     CommandLineRunner init(UserService userService) {
         return args -> {
-            UserCreateRequest request = new UserCreateRequest();
-            request.setEmail("test@babylog.com");
-            request.setPassword("1234");
-            request.setName("테스트3");
-
-            userService.createUser(request);
-
-            System.out.println("Service를 통한 유저 저장 완료.");
-
-            System.out.println(userService.findAll());
+//            UserCreateRequest request = new UserCreateRequest();
+//            request.setEmail("test@babylog.com");
+//            request.setPassword("1234");
+//            request.setName("테스트3");
+//
+//            userService.createUser(request);
+//
+//            System.out.println("Service를 통한 유저 저장 완료.");
+//
+//            System.out.println(userService.findAll());
         };
     }
 }

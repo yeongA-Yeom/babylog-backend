@@ -61,3 +61,16 @@ passwordEye.addEventListener('click', function(){
         passwordEye.icon = 'proicons:eye';
     };
 });
+
+const photo = document.querySelector('.photo');
+let turn = 1;
+
+setInterval(function() {
+    photo.src = `images/0${turn}.jpg`;
+
+    turn++;
+
+    if(turn >= 4){
+        turn=1;
+    }
+}, 3000);

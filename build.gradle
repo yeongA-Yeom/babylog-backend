@@ -1,49 +1,118 @@
 plugins {
+    // Java 프로젝트임을 선언
     id 'java'
+
+    // Spring Boot 플러그인
+    // - bootRun, bootJar 제공
+    // - Spring Boot 애플리케이션으로 패키징
     id 'org.springframework.boot' version '3.5.8'
+
+    // 의존성 버전 관리를 Spring Boot 기준으로 통합
+    // - dependency 충돌 방지
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
+// 프로젝트 그룹 ID (패키지 네임스페이스 기준)
 group = 'com.First'
+
+// 프로젝트 버전
 version = '0.0.1-SNAPSHOT'
+
+// 프로젝트 설명 (선택)
 description = 'BabyLog'
 
+// Java 버전 설정
 java {
     toolchain {
+        // Java 17 사용 (Spring Boot 3.x 최소 요구 버전)
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
+// Lombok을 compileOnly로 쓰기 위한 설정
 configurations {
     compileOnly {
+        // annotationProcessor 설정을 compileOnly가 참조하도록
         extendsFrom annotationProcessor
     }
 }
 
+// 의존성을 가져올 저장소
 repositories {
+    // Maven Central Repository
     mavenCentral()
 }
 
 dependencies {
+
+    // ==========================
+    // Database
+    // ==========================
+
+    // MariaDB JDBC 드라이버
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.3'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
+
+    // (참고) MySQL 드라이버
+    // - MariaDB 사용 시 없어도 되지만
+    // - 로컬/운영 환경 혼용 시 대비용
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+
+    // ==========================
+    // Spring Boot Starters
+    // ==========================
+
+    // Spring Data JPA
+    // - Entity, Repository, Hibernate 자동 설정
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Spring Security
+    // - 비밀번호 암호화(BCrypt)
+    // - 로그인/인가 확장 대비
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Validation
+    // - @NotNull, @Email, @Valid 등
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Thymeleaf 템플릿 엔진
+    // - HTML 렌더링용
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Spring Web (MVC + REST)
+    // - @Controller, @RestController, @RequestMapping 등
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+    // ==========================
+    // Lombok
+    // ==========================
+
+    // Lombok (Getter, Setter, Constructor 자동 생성)
+    // - 컴파일 시에만 필요
+    compileOnly 'org.projectlombok:lombok'
+
+    // Lombok 애노테이션 처리기
     annotationProcessor 'org.projectlombok:lombok'
+
+
+    // ==========================
+    // Test
+    // ==========================
+
+    // Spring Boot 테스트 스타터
+    // - JUnit 5, Mockito 포함
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Spring Security 테스트 지원
+    // - @WithMockUser 등 사용 가능
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // JUnit Platform 런처
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-
 }
 
+// 테스트 실행 시 JUnit Platform 사용
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-
-
