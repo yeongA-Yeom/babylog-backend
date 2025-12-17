@@ -1,7 +1,7 @@
 let carouselImg = document.querySelector('.photo');
 let imgNum = 1;
 
-setInterval(carousel, 1000);
+setInterval(carousel, 5000);
 function carousel(){
     imgNum += 1;
 
