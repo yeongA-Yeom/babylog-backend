@@ -4,11 +4,19 @@ const password = document.querySelector('.password input[type = password]');
 const passwordEye = document.querySelector('.password .eye');
 const logIn = document.querySelector('input[type = submit]');
 const signUpBtn = document.querySelector('#signUpBtn');
+const forgetPasswordBtn = document.querySelector('#forgetPasswordBtn');
 
 signUpBtn.addEventListener('click', () => {
     window.open(
         '/signup',          // 열 페이지 (Spring 매핑)
         'signup',
+        'width=600,height=750,resizable=no'
+    );
+});
+forgetPasswordBtn.addEventListener('click', () => {
+    window.open(
+        '/forgetPassword',          // 열 페이지 (Spring 매핑)
+        'forgetPassword',
         'width=600,height=750,resizable=no'
     );
 });

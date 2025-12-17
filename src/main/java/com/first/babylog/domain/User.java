@@ -99,4 +99,8 @@ public class User {
         this.role = Role.USER;                 // 기본 권한
         this.status = UserStatus.ACTIVE;       // 기본 상태
     }
+    // 비밀번호 변경 편의 메소드
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }

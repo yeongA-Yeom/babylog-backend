@@ -10,31 +10,7 @@
 </head>
 <body>
 
-<header>
-    <div class="logo"><a href="/" class="logoImg"><img class="logoImg" src="/images/logo.png"></a></div>
-    <div class="box">
-        <ul class="menu Left">
-            <li><a href="#">Coffee machines</a></li>
-            <li><a href="#">Coffee capsules</a></li>
-            <li><a href="#">Milk frother</a></li>
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">Sustainability</a></li>
-        </ul>
-
-
-        <ul class="menu Right">
-            <li>
-                <select name="Language" id="lang">
-                    <option value="En">English</option>
-                    <option value="Ko">Korea</option>
-                    <option value="Jp">Japan</option>
-                </select>
-            </li>
-            <li><a href="#">Search</a></li>
-            <li><a href="/login">LOGIN</a></li>
-        </ul>
-    </div>
-</header>
+<div th:replace="~{layout/header :: commonHeader}"></div>
 
 <main>
     <form class="log-in">
@@ -54,7 +30,7 @@
         <button type="submit"  class="Sign-in">Sign In</button>
 
         <div class="help">
-            <a href="#" class="help1">Forgot your password?</a>
+            <a href="#" class="help1" id="forgetPasswordBtn">Forgot your password?</a>
             <a href="#" class="help2">Manage subscriptions</a>
         </div>
 
@@ -66,6 +42,8 @@
         </div>
     </form>
 </main>
+
+<div th:replace="~{layout/footer :: commonFooter}"></div>
 
 <script src="/js/login.js" defer></script>
 </body>

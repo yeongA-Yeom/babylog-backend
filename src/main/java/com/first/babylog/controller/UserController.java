@@ -1,6 +1,7 @@
 package com.first.babylog.controller;
 
 import com.first.babylog.dto.UserCreateRequest;
+import com.first.babylog.dto.UserDto;
 import com.first.babylog.dto.UserResponse;
 import com.first.babylog.dto.UserUpdateRequest;
 import com.first.babylog.service.UserService;
@@ -44,6 +45,7 @@ public class UserController {
         return userService.findByLoginId(id);
     }
 
+
     @PutMapping("/{id}")
     public void updateUser(
             @PathVariable String id,
@@ -51,5 +53,18 @@ public class UserController {
             ){
                 userService.updateUser(id, request);
             }
+    @PostMapping("/findPassword") // 프론트엔드 fetch 주소와 똑같아야 합니다. (/users/findPassword 인지 확인 필요)
+    public ResponseEntity<String> findPassword(@RequestBody UserDto.FindPasswordRequest request) {
+        try {
+            // 1. 서비스 실행 후 '임시 비밀번호'를 받아옵니다.
+            String tempPassword = userService.createTempPassword(request);
 
+            // 2. 받아온 비밀번호를 프론트엔드로 보냅니다. (200 OK)
+            return ResponseEntity.ok(tempPassword);
+
+        } catch (IllegalArgumentException e) {
+            // 3. "일치하는 회원이 없습니다" 같은 에러 메시지를 보냅니다. (400 Bad Request)
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

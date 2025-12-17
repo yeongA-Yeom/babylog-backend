@@ -6,42 +6,18 @@
     <title>BABY LOG</title>
 
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
 <body>
 
-<header>
-    <div class="logo"><a href="/" class="logoImg"><img class="logoImg" src="/images/logo.png"></a></div>
-    <div class="box">
-        <ul class="menu Left">
-            <li><a href="#">BORI</a></li>
-            <li><a href="#">is</a></li>
-            <li><a href="#">DOG</a></li>
-            <li><a href="#">So</a></li>
-            <li><a href="#">Cute</a></li>
-        </ul>
-
-
-        <ul class="menu Right">
-            <li>
-                <select name="Language" id="lang">
-                    <option value="En">English</option>
-                    <option value="Ko">Korea</option>
-                    <option value="Jp">Japan</option>
-                </select>
-            </li>
-            <li><a href="#">BABY!!!</a></li>
-            <li><a href="/login">LOGIN</a></li>
-        </ul>
-    </div>
-</header>
+<div th:replace="~{layout/header :: commonHeader}"></div>
 
 <main>
     <div class="images">
-        <img src="images/01.jpg" class="photo">
+        <img src="/images/01.jpg" class="photo" alt="home">
     </div>
 </main>
 
-<script src="/js/login.js" defer></script>
+<div th:replace="~{layout/footer :: commonFooter}"></div>
+<script src="/js/script.js" defer></script>
 </body>
 </html>

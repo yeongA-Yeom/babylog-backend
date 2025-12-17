@@ -20,6 +20,10 @@ public class PageController {
     public String signUp() {
         return "signUp"; // templates/singUp.html
     }
+    @GetMapping("/forgetPassword")
+    public String forgetPassword() {
+        return "forgetPassword"; // templates/singUp.html
+    }
 
 
 }

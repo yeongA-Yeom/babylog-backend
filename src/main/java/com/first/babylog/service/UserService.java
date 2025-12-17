@@ -5,6 +5,7 @@ import com.first.babylog.domain.UserAgreement;
 import com.first.babylog.domain.UserEmail;
 import com.first.babylog.domain.UserProfile;
 import com.first.babylog.dto.UserCreateRequest;
+import com.first.babylog.dto.UserDto;
 import com.first.babylog.dto.UserResponse;
 import com.first.babylog.repository.UserAgreementRepository;
 import com.first.babylog.repository.UserEmailRepository;
@@ -21,6 +22,7 @@ import com.first.babylog.dto.UserUpdateRequest;
 
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -187,4 +189,35 @@ public class UserService {
         }
     }
 
+    public String createTempPassword(UserDto.FindPasswordRequest request) {
+
+        // 1. 아이디로 User 찾기 (없으면 바로 에러)
+        User user = userRepository.findByLoginId(request.getLoginId())
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자 정보가 없습니다."));
+
+        // 2. 해당 User의 이름 확인 (UserProfileRepository)
+        UserProfile profile = userProfileRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자 정보가 없습니다."));
+
+        if (!profile.getName().equals(request.getName())) {
+            throw new IllegalArgumentException("일치하는 사용자 정보가 없습니다.");
+        }
+
+        // 3. 해당 User의 이메일 확인 (UserEmailRepository)
+        UserEmail userEmail = userEmailRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자 정보가 없습니다."));
+
+        if (!userEmail.getEmail().equals(request.getEmail())) {
+            throw new IllegalArgumentException("일치하는 사용자 정보가 없습니다.");
+        }
+
+        // 4. 모든 정보가 일치함 -> 임시 비밀번호 생성 및 변경
+        String tempPassword = UUID.randomUUID().toString().substring(0, 8); // 8자리 랜덤 비번
+        user.changePassword(passwordEncoder.encode(tempPassword));
+
+        // (JPA의 영속성 컨텍스트가 자동으로 변경 감지하여 DB 업데이트를 수행합니다.
+        // 혹시 업데이트가 안 된다면 userRepository.save(user); 를 추가하세요)
+
+        return tempPassword;
+    }
 }
