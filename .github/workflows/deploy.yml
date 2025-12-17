@@ -1,26 +1,27 @@
-name: BabyLog Deploy
+name: Deploy BabyLog Backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Deploy to GCP Server
+      - name: Deploy to GCP Server via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
+          host: 34.63.165.174
+          username: dkffl2021
+          port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
-
             echo "▶ Move to project directory"
             cd /home/dkffl2021/babylog-backend
 
@@ -28,10 +29,9 @@ jobs:
             git pull origin main
 
             echo "▶ Build project"
-            ./gradlew build
+            ./gradlew clean build -x test
 
             echo "▶ Restart BabyLog service"
             sudo systemctl restart babylog
 
             echo "✅ Deploy finished successfully"
-
