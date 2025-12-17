@@ -20,6 +20,7 @@ public class User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="userNum")
     private Long userNum;
 
     /**
