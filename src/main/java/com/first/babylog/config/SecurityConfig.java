@@ -25,7 +25,8 @@ public class SecurityConfig {
                                 "/users",           // 회원가입 API
                                 "/css/**",          // css
                                 "/js/**",           // js
-                                "/images/**"        // 이미지
+                                "/images/**",        // 이미지
+                                "/favicon.ico"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

@@ -1,0 +1,15 @@
+/* common.css */
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Agdasima', sans-serif;
+    list-style: none;
+    color: #1D1D1B;
+}
+
+body {
+    background-color: #F6F5EE;
+}

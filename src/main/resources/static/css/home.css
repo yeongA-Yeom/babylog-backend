@@ -1,0 +1,7 @@
+/* home.css */
+
+.images img {
+    width: 550px;
+    height: 550px;
+    object-fit: cover;
+}

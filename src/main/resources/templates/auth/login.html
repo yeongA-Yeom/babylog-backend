@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BABY LOG</title>
 
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/auth.css">
 </head>
 <body>
 
@@ -17,13 +18,13 @@
         <h1>LOG IN</h1>
 
         <div class="ID">
-            <label>Email</label>
-            <input type="email" placeholder="Enter your Email." required>
+            <label for="id">ID</label>
+            <input id="id" type="email" placeholder="Enter your ID." required>
         </div>
 
         <div class="password">
-            <label>Password</label>
-            <input type="password" placeholder="Enter your password." required>
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Enter your password." required>
             <iconify-icon icon="proicons:eye" class="eye"></iconify-icon>
         </div>
 
@@ -45,6 +46,8 @@
 
 <div th:replace="~{layout/footer :: commonFooter}"></div>
 
-<script src="/js/login.js" defer></script>
+<script type="module" src="/js/auth/login.js"></script>
+<script src="/js/lib/iconify-icon.min.js"></script>
+
 </body>
 </html>

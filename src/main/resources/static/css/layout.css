@@ -1,0 +1,67 @@
+/* layout.css */
+
+/* HEADER */
+header {
+    width: 100%;
+}
+
+header .box {
+    width: 96vw;
+    max-width: 1440px;
+    height: 30px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    border-bottom: 1px solid #CAC7C7;
+}
+
+header .logo {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    height: 120px;
+    margin: 30px;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    gap: 32px;
+    position: absolute;
+}
+
+.menu.Left { left: 16px; }
+.menu.Right { right: 16px; }
+
+.menu a {
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.menu select {
+    background-color: #F6F5EE;
+    border: none;
+    font-size: 16px;
+}
+
+/* MAIN */
+main {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    margin: 30px;
+}
