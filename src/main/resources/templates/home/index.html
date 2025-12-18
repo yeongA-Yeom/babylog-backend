@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BABY LOG</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/layout :: layout(
+          ~{::content},
+          ~{::css}, ~{::script}
+      )}">
 
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/layout.css">
+<!-- 🔹 메인 전용 CSS -->
+<th:block th:fragment="css">
     <link rel="stylesheet" href="/css/home.css">
-</head>
-<body>
+</th:block>
 
-<div th:replace="~{layout/header :: commonHeader}"></div>
 
-<main>
+<!-- 🔹 메인 콘텐츠 -->
+<div th:fragment="content">
     <div class="images">
-        <img src="/images/01.jpg" class="photo" alt="home">
+        <img class="photo" src="/images/01.jpg" alt="home">
     </div>
-</main>
+</div>
 
-<div th:replace="~{layout/footer :: commonFooter}"></div>
-<script src="/js/home.js" defer></script>
-</body>
+<!-- 🔹 메인 전용 JS -->
+<th:block th:fragment="script">
+    <script src="/js/home.js" defer></script>
+</th:block>
+
 </html>

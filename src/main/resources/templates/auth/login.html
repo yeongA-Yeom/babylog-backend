@@ -1,19 +1,31 @@
+
+
+<script type="module" src="/js/auth/login.js"></script>
+<script src="/js/lib/iconify-icon.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BABY LOG</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/layout :: layout(
+          ~{::content},
+          ~{::css}, ~{::script}
+      )}">
 
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/layout.css">
+<!-- 🔹 메인 전용 CSS -->
+<th:block th:fragment="css">
     <link rel="stylesheet" href="/css/auth.css">
-</head>
-<body>
+</th:block>
 
-<div th:replace="~{layout/header :: commonHeader}"></div>
 
-<main>
+<!-- 🔹 메인 콘텐츠 -->
+<div th:fragment="content">
+
     <form class="log-in">
         <h1>LOG IN</h1>
 
@@ -42,12 +54,12 @@
             <button type="button" id="signUpBtn">Register NOW</button>
         </div>
     </form>
-</main>
+</div>
 
-<div th:replace="~{layout/footer :: commonFooter}"></div>
+<!-- 🔹 전용 JS -->
+<th:block th:fragment="script">
+    <script type="module" src="/js/auth/login.js"></script>
+    <script src="/js/lib/iconify-icon.min.js"></script>
+</th:block>
 
-<script type="module" src="/js/auth/login.js"></script>
-<script src="/js/lib/iconify-icon.min.js"></script>
-
-</body>
 </html>
