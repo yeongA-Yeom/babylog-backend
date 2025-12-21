@@ -2,7 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BabyLog 회원가입</title>
+    <!-- CSS 경로는 프로젝트 구조에 맞게 확인해주세요 -->
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
@@ -12,55 +14,166 @@
     <h2>회원가입</h2>
 
     <form id="signupForm">
-        <!-- 로그인 아이디 -->
+        <!-- 1. 아이디 (백엔드 필드명: username) -->
+        <!-- 기존 loginId -> username으로 변경 -->
         <div class="form-group login-id">
-            <label>아이디</label>
+            <label for="username">아이디</label>
             <input type="text"
-                   name="loginId"
+                   id="username"
+                   name="username"
                    placeholder="영문/숫자 조합 아이디"
                    required>
         </div>
 
-        <!-- 비밀번호 -->
+        <!-- 2. 비밀번호 (백엔드 필드명: password) -->
         <div class="form-group password">
-            <label>비밀번호</label>
+            <label for="password">비밀번호</label>
             <input type="password"
+                   id="password"
                    name="password"
                    placeholder="비밀번호"
                    required>
         </div>
 
-        <!-- 비밀번호 확인 -->
+        <!-- 3. 비밀번호 확인 (백엔드 전송 X, 프론트 검증용) -->
         <div class="form-group re-password">
-            <label>비밀번호 확인</label>
+            <label for="rePassword">비밀번호 확인</label>
             <input type="password"
+                   id="rePassword"
                    name="rePassword"
                    placeholder="비밀번호 재입력"
                    required>
         </div>
 
-        <!-- 이메일 -->
+        <!-- 4. 이메일 (백엔드 필드명: email) -->
         <div class="form-group email">
-            <label>이메일</label>
+            <label for="email">이메일</label>
             <input type="email"
+                   id="email"
                    name="email"
                    placeholder="email@babylog.com"
                    required>
         </div>
 
-        <!-- 이름 -->
+        <!-- 5. 이름 (백엔드 필드명: name) -->
         <div class="form-group name">
-            <label>이름</label>
+            <label for="name">이름</label>
             <input type="text"
+                   id="name"
                    name="name"
-                   placeholder="이름"
+                   placeholder="실명 입력"
                    required>
         </div>
 
-        <button type="submit">회원가입</button>
+        <!-- [추가됨] 6. 닉네임 (백엔드 필드명: nickname) -->
+        <div class="form-group nickname">
+            <label for="nickname">닉네임</label>
+            <input type="text"
+                   id="nickname"
+                   name="nickname"
+                   placeholder="앱에서 사용할 별명"
+                   required>
+        </div>
+        <!-- 7. 임신 여부 (기본 해제 상태) -->
+        <div class="form-group is-pregnant">
+            <label>
+                <input type="checkbox" id="isPregnant" name="isPregnant">
+                현재 임신 중입니다
+            </label>
+        </div>
+
+        <!-- 8. 출산 예정일 (처음엔 숨겨짐 - hidden 클래스 추가됨) -->
+        <div class="form-group due-date hidden" id="dueDateGroup">
+            <label for="babyDueDate">출산 예정일</label>
+            <input type="date" id="babyDueDate" name="babyDueDate">
+        </div>
+
+        <button type="submit" class="btn-signup">가입하기</button>
     </form>
 </div>
 
-<script type="module" src="/js/auth/signUp.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const isPregnantCheckbox = document.getElementById('isPregnant');
+        const dueDateGroup = document.getElementById('dueDateGroup');
+        const dueDateInput = document.getElementById('babyDueDate');
+
+        // 토글 함수: 체크 여부에 따라 보였다 안 보였다 하게 함
+        function toggleDueDate() {
+           if (isPregnantCheckbox.checked) {
+                // 체크되면 보임
+                // 1. hidden 클래스 제거
+                dueDateGroup.classList.remove('hidden');
+                // 2. 인라인 스타일로 display 속성 강제 변경 (CSS 우선순위 문제 해결)
+                dueDateGroup.style.display = 'block';
+            } else {
+                // 체크 해제되면 숨김
+                // 1. hidden 클래스 추가
+                dueDateGroup.classList.add('hidden');
+                // 2. 인라인 스타일로 확실히 숨김
+                dueDateGroup.style.display = 'none';
+
+                // 날짜값 초기화
+                dueDateInput.value = '';
+            }
+        }
+
+        // 이벤트 연결 및 초기 실행
+        if (isPregnantCheckbox && dueDateGroup) {
+            isPregnantCheckbox.addEventListener('change', toggleDueDate);
+            // 초기 상태 확인 (HTML에 hidden이 있어도 JS로직상 한번 더 확인)
+            toggleDueDate();
+        } else {
+            console.error("HTML 요소를 찾을 수 없습니다. 아이디를 확인해주세요.");
+        }
+
+        // 전송 로직
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            console.log("전송 버튼 눌림");
+
+            const formData = new FormData(e.target);
+
+            if (formData.get('password') !== formData.get('rePassword')) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+
+            const jsonData = {
+                username: formData.get('username'),
+                password: formData.get('password'),
+                email: formData.get('email'),
+                name: formData.get('name'),
+                nickname: formData.get('nickname'),
+                babyDueDate: formData.get('babyDueDate') || null,
+                isPregnant: isPregnantCheckbox.checked // 체크박스 상태 직접 확인
+            };
+
+            console.log("보낼 데이터:", jsonData);
+
+            try {
+                const response = await fetch('http://localhost:8080/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(jsonData)
+                });
+
+                if (response.ok) {
+                    alert('회원가입 성공!');
+                } else {
+                    const errorText = await response.text();
+                    alert('가입 실패: ' + errorText);
+                }
+            } catch (error) {
+                console.error('에러 발생:', error);
+                alert('서버와 연결할 수 없습니다. (F12 콘솔 확인 필요)');
+            }
+        });
+    });
+</script>
+
+
+
 </body>
 </html>
