@@ -19,13 +19,14 @@ public class SecurityConfig {
                 // 접근 허용 경로
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/",                // 메인
+                                "/**",                // 메인
                                 "/login",           // 로그인
                                 "/signup",          // 회원가입 페이지
                                 "/users",           // 회원가입 API
                                 "/css/**",          // css
                                 "/js/**",           // js
                                 "/images/**",        // 이미지
+                                "/oauth/**",        // 카카오톡
                                 "/favicon.ico"
                         ).permitAll()
                         .anyRequest().authenticated()

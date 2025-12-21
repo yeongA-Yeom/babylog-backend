@@ -1,7 +1,11 @@
 package com.first.babylog.domain;
 
+import com.first.babylog.dto.SocialLoginRequest;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +19,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Table(name = "users")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     /**
@@ -83,11 +88,18 @@ public class User {
      */
     private LocalDateTime deletedAt;
 
-    /**
-     * JPA 기본 생성자
-     */
-    protected User() {
-    }
+
+
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY    )
+    private UserProfile profile;
+
+
+
+
+
 
     /**
      * 회원가입 시 사용하는 생성자
@@ -99,8 +111,51 @@ public class User {
         this.role = Role.USER;                 // 기본 권한
         this.status = UserStatus.ACTIVE;       // 기본 상태
     }
-    // 비밀번호 변경 편의 메소드
+    /**
+     * ✅ 일반 회원가입용 팩토리 메서드
+     */
+    public static User signUp(String loginId, String password) {
+        return new User(loginId, password);
+    }
+
+    /**
+     * ✅ 소셜 로그인용 유저 생성
+     * (loginId / password 없음)
+     */
+    public static User createSocialUser(String provider ,String porviderId) {
+        User user = new User();
+        user.loginId = provider+"_"+porviderId;
+        user.password = "{SOCIAL_LOGIN}";
+        user.role = Role.USER;
+        user.status = UserStatus.ACTIVE;
+        return user;
+    }
+
+    public void assignProfile(UserProfile profile) {
+        this.profile = profile;
+        profile.assignUser(this);
+    }
+
+    /**
+     * 마지막 로그인 시각 갱신
+     */
+    public void updateLastLoginAt() {
+        this.lastLoginAt = LocalDateTime.now();
+    }
+
+    /**
+     * 비밀번호 변경
+     */
     public void changePassword(String newPassword) {
         this.password = newPassword;
+        this.passwordChangedAt = LocalDateTime.now();
+    }
+
+    /**
+     * 계정 비활성화 (탈퇴)
+     */
+    public void deactivate() {
+        this.status = UserStatus.INACTIVE;
+        this.deletedAt = LocalDateTime.now();
     }
 }

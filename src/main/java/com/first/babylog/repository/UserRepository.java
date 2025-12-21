@@ -1,5 +1,6 @@
 package com.first.babylog.repository;
 
+import com.first.babylog.domain.UserSocialAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.first.babylog.domain.User;
 
@@ -15,8 +16,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 
+
+
     /** 로그인 아이디 중복 체크 */
     boolean existsByLoginId(String loginId);
+
+    /** 카카오 로그인 관련   */
+
+
 
 
 }

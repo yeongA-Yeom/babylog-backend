@@ -16,4 +16,7 @@ public interface UserEmailRepository extends JpaRepository<UserEmail, Long> {
 
     Optional<UserEmail> findByUser(User user);
 
+    //회원 탈퇴
+    void deleteByUser(User user);
+
 }

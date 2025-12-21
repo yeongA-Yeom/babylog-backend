@@ -14,5 +14,8 @@ public interface UserProfileRepository
 
     Optional<UserProfile> findByUser(User user);
 
+    //회원 탈퇴
+    void deleteByUser(User user);
+
 }
 

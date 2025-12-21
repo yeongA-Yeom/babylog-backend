@@ -83,6 +83,9 @@ dependencies {
     // - @Controller, @RestController, @RequestMapping 등
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    // 의존성 추가 - 파일 변경을 감지해서 리소스를 갱신
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 
     // ==========================
     // Lombok

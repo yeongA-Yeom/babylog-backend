@@ -78,3 +78,13 @@ passwordEye.addEventListener('click', () => {
         ? 'proicons:eye-off'
         : 'proicons:eye';
 });
+
+
+
+
+// 카카오톡 로그인
+const kakaoLoginBtn = document.querySelector('#kakaoLoginBtn');
+
+kakaoLoginBtn.addEventListener('click', () => {
+    window.location.href = '/oauth/kakao';
+});

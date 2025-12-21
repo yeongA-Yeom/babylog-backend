@@ -76,18 +76,11 @@ public class UserService {
         }
 
         // 4️⃣ users 테이블 저장
-        User user = new User(
-                request.getLoginId(),
-                passwordEncoder.encode(request.getPassword())
-        );
+        User user = User.signUp(request.getLoginId(), request.getPassword());
+        UserProfile profile = UserProfile.create(request.getName());
+        user.assignProfile(profile);
         userRepository.save(user);
 
-        // 5️⃣ user_profiles 테이블 저장
-        UserProfile profile = new UserProfile(
-                user,
-                request.getName()
-        );
-        userProfileRepository.save(profile);
 
         // 6️⃣ user_emails 테이블 저장
         UserEmail email = new UserEmail(

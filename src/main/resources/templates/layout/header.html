@@ -9,7 +9,7 @@
       <li><a href="#">BORI </a></li>
       <li><a href="#">is</a></li>
       <li><a href="#">DOG</a></li>
-      <li><a href="#">S♥</a></li>
+      <li><a href="#">So</a></li>
       <li><a href="#">Cute</a></li>
     </ul>
 
@@ -21,8 +21,22 @@
           <option value="Jp">Japan</option>
         </select>
       </li>
-      <li><a href="#">♥BABY♥</a></li>
-      <li><a href="/login">LOGIN</a></li>
+      <li><a href="#">BABY</a></li>
+      <!--<li><a href="/login">LOGIN</a></li>-->
+      <li>
+
+        <!-- 로그인 안 된 상태 -->
+        <a th:if="${session.LOGIN_USER == null}"
+           href="/oauth/kakao">
+          LOGIN
+        </a>
+
+        <!-- 로그인 된 상태 -->
+        <a th:if="${session.LOGIN_USER != null}"
+           href="/oauth/kakao/unlink">
+          LOGOUT
+        </a>
+      </li>
     </ul>
   </div>
 </header>
